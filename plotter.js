@@ -1,10 +1,14 @@
   // config
   var avg_window = 40;
-
+  var bg_color = '#000000';  //'#1B1B1B'
+  var line_color = '#8663FF';
+  var chart_pad = 20;
+  
   // init
   var smoothie = new SmoothieChart({
     grid: {
-      strokeStyle: '#000000',
+      strokeStyle: bg_color,
+      fillStyle: bg_color,
       borderVisible: false
     }
   });
@@ -13,22 +17,24 @@
   var counter = 0
 
   var canvas = document.getElementById('linePlot')
-  canvas.width = window.innerWidth - 20;
-  canvas.height = window.innerHeight - 20;
-
+  canvas.width = window.innerWidth - chart_pad;
+  canvas.height = window.innerHeight - chart_pad;
+  
+  document.body.style.backgroundColor = bg_color;
   document.body.onclick=function(){
     document.body.webkitRequestFullscreen();
   }
 
   smoothie.addTimeSeries(plot_buffer, {
     lineWidth: 2,
-    strokeStyle: '#6aeefe'
+    strokeStyle: line_color
   })
   smoothie.streamTo(document.getElementById("linePlot"), 500);
   console.log('initialized...')
 
   // run
   window.addEventListener('load', function() {
+
     console.log('loaded doppler')
     window.doppler.init(function(bandwidth) {
       var diff = bandwidth.right - bandwidth.left;
