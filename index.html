@@ -2,12 +2,22 @@
 <html>
 
 <head>
-  <title>SpiroDopple Demo</title>
+  <title>Spiro Doppler Demo</title>
   <script type="text/javascript" src="smoothie.js"></script>
   <script type="text/javascript" src="doppler.js"></script>
+  <style>
+    .button {
+      background-color: #000000;
+      color: white;
+    }
+  </style>
 </head>
 
 <body>
+  <input class="button" type="button" value="toggle doppler" onclick="doppler_toggle()" />
+  <input class="button" type="button" value="toggle synth" onclick="synth_toggle()" />
+  <input class="button" type="button" value="toggle fullscreen" onclick="fullscreen_toggle()" />
+
   <canvas id="linePlot"></canvas>
   <script type="text/javascript" src="plotter.js"></script>
 </body>

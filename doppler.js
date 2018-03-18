@@ -7,6 +7,7 @@ window.doppler = (function() {
 
   var ctx = new AuContext();
   var osc = ctx.createOscillator();
+
   // This is just preliminary, we'll actually do a quick scan
   // (as suggested in the paper) to optimize this.
   var freq = 20000;
@@ -34,7 +35,12 @@ window.doppler = (function() {
       var normalizedVolume = volume / primaryVolume;
     } while (normalizedVolume > maxVolumeRatio && rightBandwidth < relevantFreqWindow);
 
-    return { left: leftBandwidth, right: rightBandwidth };
+    return {
+      left: leftBandwidth,
+      right: rightBandwidth,
+      diff: rightBandwidth - leftBandwidth,
+      magnitude: Math.abs(rightBandwidth - leftBandwidth)
+     };
   };
 
   var freqToIndex = function(analyser, freq) {
@@ -80,10 +86,8 @@ window.doppler = (function() {
   var readMic = function(analyser, userCallback) {
     var audioData = new Uint8Array(analyser.frequencyBinCount);
     analyser.getByteFrequencyData(audioData);
-
     var band = getBandwidth(analyser, audioData);
     userCallback(band);
-
     readMicInterval = setTimeout(readMic, 1, analyser, userCallback);
   };
 
