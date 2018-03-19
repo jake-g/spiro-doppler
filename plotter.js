@@ -1,5 +1,5 @@
   // config
-  var buffer_size = 30;
+  var buffer_size = 40;
 
   var plot_conf = {
     "bg_color": '#000000',
