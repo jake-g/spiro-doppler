@@ -21,25 +21,26 @@ window.doppler = (function() {
     // This ratio is totally empirical (aka trial-and-error).
     var maxVolumeRatio = 0.001;
 
-    var leftBandwidth = 0;
+    var leftBw = 0;
     do {
-      leftBandwidth++;
-      var volume = freqs[primaryTone-leftBandwidth];
+      leftBw++;
+      var volume = freqs[primaryTone-leftBw];
       var normalizedVolume = volume / primaryVolume;
-    } while (normalizedVolume > maxVolumeRatio && leftBandwidth < relevantFreqWindow);
+    } while (normalizedVolume > maxVolumeRatio && leftBw < relevantFreqWindow);
 
-    var rightBandwidth = 0;
+    var rightBw = 0;
     do {
-      rightBandwidth++;
-      var volume = freqs[primaryTone+rightBandwidth];
+      rightBw++;
+      var volume = freqs[primaryTone+rightBw];
       var normalizedVolume = volume / primaryVolume;
-    } while (normalizedVolume > maxVolumeRatio && rightBandwidth < relevantFreqWindow);
+    } while (normalizedVolume > maxVolumeRatio && rightBw < relevantFreqWindow);
 
     return {
-      left: leftBandwidth,
-      right: rightBandwidth,
-      diff: rightBandwidth - leftBandwidth,
-      magnitude: Math.abs(rightBandwidth - leftBandwidth)
+      left: leftBw,
+      right: rightBw,
+      diff: rightBw - leftBw,
+      magnitude: Math.abs(rightBw - leftBw),
+      energy: Math.pow(rightBw - leftBw, 2)
      };
   };
 

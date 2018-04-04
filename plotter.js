@@ -1,5 +1,6 @@
   // config
   var buffer_size = 30;
+  var noise_thresh = 1;
 
   var plot_conf = {
     "bg_color": '#000000',
@@ -61,6 +62,11 @@
     }
   }
 
+  function gate_toggle() {
+    gate_on = !gate_on;
+    console.log('gate on', gate_on);
+  }
+
   // init /////////////////////////////////////
   // tone
   var AuContext = (window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.oAudioContext || window.msAudioContext);
@@ -68,6 +74,8 @@
   var synth, gain
   var fullscreen = false
   var doppler_on = true
+  var gate_on = true
+
   synth_init()
 
   // chart
@@ -114,6 +122,12 @@
         }
         var avg = sum / _buffer.length;
         console.log(avg)
+
+        // noise gate
+
+        if (gate_on && avg < noise_thresh) {
+          avg = 0;
+        }
         plot_buffer.append(new Date().getTime(), avg);
         _buffer = []
 
