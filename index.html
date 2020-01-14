@@ -1,10 +1,9 @@
 <!doctype html>
 <html>
-
 <head>
-  <title>Spiro Doppler Demo</title>
+  <title>Ultrasound Motion Demo</title>
   <script type="text/javascript" src="smoothie.js"></script>
-  <script type="text/javascript" src="doppler.js"></script>
+  <script type="text/javascript" src="ultrasound_doppler.js"></script>
   <style>
     html {
       font-family: "Menlo", "Lucida Sans Typewriter", "Lucida Console", Consolas, mono-space;
@@ -17,16 +16,12 @@
     }
   </style>
 </head>
-
 <body>
   <input class="button" type="button" value="toggle doppler" onclick="doppler_toggle()" />
-    <input class="button" type="button" value="toggle synth" onclick="synth_toggle()" />
-
+  <input class="button" type="button" value="toggle synth" onclick="synth_toggle()" />
   <input class="button" type="button" value="toggle gate" onclick="gate_toggle()" />
   <input class="button" type="button" value="toggle fullscreen" onclick="fullscreen_toggle()" />
-
   <canvas id="linePlot"></canvas>
   <script type="text/javascript" src="plotter.js"></script>
 </body>
-
 </html>
